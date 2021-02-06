@@ -19,5 +19,31 @@
 
 package org.oaknorth.springelastic.entities.jpa;
 
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+@Data
 public class Address {
+
+    @Column(name = "first_line")
+    private String firstLine;
+
+    @Column(name = "second_line")
+    private String secondLine;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "zip")
+    private String zipCode;
+
 }

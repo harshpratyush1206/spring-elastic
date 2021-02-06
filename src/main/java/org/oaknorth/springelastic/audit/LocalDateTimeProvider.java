@@ -17,17 +17,19 @@
  * under the License.
  */
 
-package org.oaknorth.platform.loan.audit;
+package org.oaknorth.springelastic.audit;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 import org.springframework.data.auditing.DateTimeProvider;
+import org.springframework.lang.NonNull;
 
 public class LocalDateTimeProvider implements DateTimeProvider {
 
   @Override
+  @NonNull
   public Optional<TemporalAccessor> getNow() {
     return Optional.of(LocalDateTime.now(Clock.systemUTC()));
   }

@@ -19,5 +19,32 @@
 
 package org.oaknorth.springelastic.entities.jpa;
 
-public class Author {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.oaknorth.springelastic.audit.Auditable;
+
+import javax.persistence.*;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "authors")
+public class Author extends Auditable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "first_name",nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name",nullable = false)
+    private String lastName;
+
+    @Column(name = "middle_name")
+    private String middleName;
+
+    @Embedded
+    private Address address;
+
 }

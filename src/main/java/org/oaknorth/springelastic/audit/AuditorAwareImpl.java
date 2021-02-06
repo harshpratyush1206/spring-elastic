@@ -1,12 +1,13 @@
-package org.oaknorth.platform.loan.audit;
+package org.oaknorth.springelastic.audit;
 
 import java.util.Optional;
-import org.oaknorth.platform.loan.internal.util.SecurityUtil;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.lang.NonNull;
 
 public class AuditorAwareImpl implements AuditorAware<String> {
   @Override
+  @NonNull
   public Optional<String> getCurrentAuditor() {
-    return Optional.of(SecurityUtil.getAuthorId());
+    return Optional.of("Guest");
   }
 }

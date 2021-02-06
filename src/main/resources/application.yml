@@ -1,1 +1,26 @@
+spring:
+  datasource:
+    password: ${password:admin}
+    url: jdbc:postgresql://${db_host:localhost}:${db_port:5432}/${db_name:search_db}
+    username: ${username}
+    maximum-pool-size: 30
+    hikari:
+      maximum-pool-size: 30
+      pool-name: search-service-pool
+      connection-init-sql: SELECT 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.oaknorth.springelastic.config.TableNamingStrategy
+      ddl-auto: update
+  flyway:
+    table: search_schema_version
+    baseline-on-migrate: true
+    baseline-version: 0
+    repair: true
+    locations: classpath:/db/migration/postgres
+  output:
+    ansi:
+      enabled: ALWAYS
 

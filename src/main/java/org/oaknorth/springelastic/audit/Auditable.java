@@ -1,17 +1,21 @@
-package org.oaknorth.platform.loan.audit;
+package org.oaknorth.springelastic.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+@Data
+@EqualsAndHashCode
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class Auditable {
@@ -35,52 +39,4 @@ public class Auditable {
   @JsonIgnore
   @Column(name = "last_modified_on")
   private LocalDateTime lastModifiedOn;
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public LocalDateTime getCreatedOn() {
-    return createdOn;
-  }
-
-  public void setCreatedOn(LocalDateTime createdOn) {
-    this.createdOn = createdOn;
-  }
-
-  public String getLastModifiedBy() {
-    return lastModifiedBy;
-  }
-
-  public void setLastModifiedBy(String lastModifiedBy) {
-    this.lastModifiedBy = lastModifiedBy;
-  }
-
-  public LocalDateTime getLastModifiedOn() {
-    return lastModifiedOn;
-  }
-
-  public void setLastModifiedOn(LocalDateTime lastModifiedOn) {
-    this.lastModifiedOn = lastModifiedOn;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Auditable auditable = (Auditable) o;
-    return Objects.equals(createdBy, auditable.createdBy)
-        && Objects.equals(createdOn, auditable.createdOn)
-        && Objects.equals(lastModifiedBy, auditable.lastModifiedBy)
-        && Objects.equals(lastModifiedOn, auditable.lastModifiedOn);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(createdBy, createdOn, lastModifiedBy, lastModifiedOn);
-  }
 }
