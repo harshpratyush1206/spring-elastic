@@ -19,7 +19,6 @@
 
 package org.oaknorth.springelastic.entities.jpa;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -28,6 +27,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.oaknorth.springelastic.audit.Auditable;
 
 import javax.persistence.*;
+import java.time.Month;
+import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,29 +36,33 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "authors")
-public class Author extends Auditable {
+@Table(name = "books")
+public class Books extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "first_name",nullable = false)
-    private String firstName;
+    @Column(name = "publish_year", nullable = false)
+    private Year publishYear;
 
-    @Column(name = "last_name",nullable = false)
-    private String lastName;
+    @Column(name = "publish_month", nullable = false)
+    private Month publishMonth;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    @Embedded
-    private Address address;
+    @Column(name = "description",length = 500, nullable = false)
+    private String description;
 
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "authors")
-    @LazyCollection(value = LazyCollectionOption.EXTRA)
-    private Set<Books> books = new HashSet<>();
-
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Book_Author",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "author_id") }
+    )
+    @LazyCollection(
+            value = LazyCollectionOption.EXTRA
+    )
+    Set<Author> authors = new HashSet<>();
 }

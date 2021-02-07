@@ -38,7 +38,7 @@ import org.springframework.lang.NonNull;
 @EnableElasticsearchAuditing(modifyOnCreate = false,auditorAwareRef = "auditorAware")
 public class ElasticSearchConfiguration extends AbstractElasticsearchConfiguration {
 
-    @Value("es_port")
+    @Value("${es_port}")
     private String es_port;
 
     @NonNull

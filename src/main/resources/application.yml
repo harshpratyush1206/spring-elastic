@@ -23,6 +23,14 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          elasticsearch:
+            client:
+              WIRE: ERROR
 
 
 elastic:

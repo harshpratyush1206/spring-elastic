@@ -17,35 +17,33 @@
  * under the License.
  */
 
-package org.oaknorth.springelastic.entities.jpa;
+package org.oaknorth.springelastic.entities.elastic;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
-@Embeddable
 @Data
 @ToString
-public class Address {
+public class AddressBase {
 
-    @Column(name = "first_line",nullable = false)
+    @Field(type = FieldType.Text,name = "first_line")
     private String firstLine;
 
-    @Column(name = "second_line")
+    @Field(type = FieldType.Text,name = "second_line")
     private String secondLine;
 
-    @Column(name = "city", nullable = false)
+    @Field(type = FieldType.Text,name = "city")
     private String city;
 
-    @Column(name = "state", nullable = false)
+    @Field(type = FieldType.Text,name = "state")
     private String state;
 
-    @Column(name = "country", nullable = false)
+    @Field(type = FieldType.Text,name = "country")
     private String country;
 
-    @Column(name = "zip", nullable = false)
+    @Field(type = FieldType.Text,name = "zip")
     private String zipCode;
 
 }

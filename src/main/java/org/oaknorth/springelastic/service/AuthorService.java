@@ -17,35 +17,11 @@
  * under the License.
  */
 
-package org.oaknorth.springelastic.entities.jpa;
+package org.oaknorth.springelastic.service;
 
-import lombok.Data;
-import lombok.ToString;
+import org.oaknorth.springelastic.entities.jpa.Author;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+public interface AuthorService {
 
-@Embeddable
-@Data
-@ToString
-public class Address {
-
-    @Column(name = "first_line",nullable = false)
-    private String firstLine;
-
-    @Column(name = "second_line")
-    private String secondLine;
-
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "state", nullable = false)
-    private String state;
-
-    @Column(name = "country", nullable = false)
-    private String country;
-
-    @Column(name = "zip", nullable = false)
-    private String zipCode;
-
+    Author saveAuthor(Author author);
 }

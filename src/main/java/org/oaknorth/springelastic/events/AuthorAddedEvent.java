@@ -17,35 +17,20 @@
  * under the License.
  */
 
-package org.oaknorth.springelastic.entities.jpa;
+package org.oaknorth.springelastic.events;
 
-import lombok.Data;
-import lombok.ToString;
+import org.oaknorth.springelastic.entities.jpa.Author;
+import org.springframework.context.ApplicationEvent;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+public class AuthorAddedEvent extends ApplicationEvent {
 
-@Embeddable
-@Data
-@ToString
-public class Address {
-
-    @Column(name = "first_line",nullable = false)
-    private String firstLine;
-
-    @Column(name = "second_line")
-    private String secondLine;
-
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "state", nullable = false)
-    private String state;
-
-    @Column(name = "country", nullable = false)
-    private String country;
-
-    @Column(name = "zip", nullable = false)
-    private String zipCode;
-
+    /**
+     * Create a new {@code ApplicationEvent}.
+     *
+     * @param source the object on which the event initially occurred or with
+     *               which the event is associated (never {@code null})
+     */
+    public AuthorAddedEvent(Author source) {
+        super(source);
+    }
 }

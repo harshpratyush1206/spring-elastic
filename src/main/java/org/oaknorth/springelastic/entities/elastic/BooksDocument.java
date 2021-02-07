@@ -17,47 +17,41 @@
  * under the License.
  */
 
-package org.oaknorth.springelastic.entities.jpa;
+package org.oaknorth.springelastic.entities.elastic;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.oaknorth.springelastic.audit.Auditable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
-@Entity
-@Table(name = "authors")
-public class Author extends Auditable {
+@Document(indexName = "books_index")
+public class BooksDocument extends Auditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "first_name",nullable = false)
-    private String firstName;
+    @Field(name = "publish_year",type = FieldType.Long)
+    private long publishYear;
 
-    @Column(name = "last_name",nullable = false)
-    private String lastName;
+    @Field(name = "publish_month",type = FieldType.Integer)
+    private int publishMonth;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    @Field(name = "title",type = FieldType.Text)
+    private String title;
 
-    @Embedded
-    private Address address;
+    @Field(name = "description",type = FieldType.Text)
+    private String description;
 
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "authors")
-    @LazyCollection(value = LazyCollectionOption.EXTRA)
-    private Set<Books> books = new HashSet<>();
-
+    @Field(name = "authors")
+    Set<AuthorDocument> authors = new HashSet<>();
 }

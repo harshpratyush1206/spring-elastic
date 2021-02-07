@@ -17,47 +17,33 @@
  * under the License.
  */
 
-package org.oaknorth.springelastic.entities.jpa;
+package org.oaknorth.springelastic.entities.elastic;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.oaknorth.springelastic.audit.Auditable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
+@Document(indexName = "author_index")
 @Data
 @ToString
-@EqualsAndHashCode(callSuper = false)
-@Entity
-@Table(name = "authors")
-public class Author extends Auditable {
+@EqualsAndHashCode(callSuper = true)
+public class AuthorDocument extends AddressBase{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
-    @Column(name = "first_name",nullable = false)
+    @Field(type = FieldType.Text,name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
+    @Field(type = FieldType.Text,name = "last_name")
     private String lastName;
 
-    @Column(name = "middle_name")
+    @Field(type = FieldType.Text, name = "middle_name")
     private String middleName;
-
-    @Embedded
-    private Address address;
-
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "authors")
-    @LazyCollection(value = LazyCollectionOption.EXTRA)
-    private Set<Books> books = new HashSet<>();
 
 }

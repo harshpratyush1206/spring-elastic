@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = FlywayAutoConfiguration.class)
-@EnableJpaRepositories(basePackages = "org.oaknorth.springelastic.repository.jpa")
+@EnableJpaRepositories(basePackages = "org.oaknorth.springelastic.respository.jpa")
 @EnableJpaAuditing(auditorAwareRef = "auditorAware",modifyOnCreate = false,dateTimeProviderRef = "dateTimeProvider")
 @Import(value = {ElasticSearchConfiguration.class})
 public class ElasticSearchApplication {
