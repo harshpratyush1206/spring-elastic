@@ -24,3 +24,8 @@ spring:
     ansi:
       enabled: ALWAYS
 
+
+elastic:
+  search:
+    uri: ${es_port}
+

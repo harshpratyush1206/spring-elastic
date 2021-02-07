@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   springelastic:
     build:
@@ -13,10 +14,11 @@ services:
       - username=postgres
       - password=admin
       - db_port=5432
-      - spring.profiles.active=psql
+      - es_port=localhost:9200
     depends_on:
-      - postgres
-  postgres:
+      - db
+      - elastic
+  db:
     image: postgres:10-alpine
     container_name: search-service-db
     environment:
@@ -26,3 +28,7 @@ services:
   elastic:
     image: elasticsearch:6.5.0
     container_name: elastic-search
+    environment:
+      - discovery.type=single-node
+    ports:
+    - "9200:9200"

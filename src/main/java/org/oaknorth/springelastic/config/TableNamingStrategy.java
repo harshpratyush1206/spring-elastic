@@ -25,7 +25,7 @@ import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
 
 public class TableNamingStrategy extends PhysicalNamingStrategyStandardImpl {
 
-    public static final String TABLE_NAME_PREFIX = "seth";
+    public static final String TABLE_NAME_PREFIX = "seth_";
 
     @Override
     public Identifier toPhysicalTableName(Identifier name, JdbcEnvironment context) {
